@@ -1,5 +1,5 @@
-const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken");
+// const bcrypt = require("bcryptjs")
+// const jwt = require("jsonwebtoken");
 const Jobs = require("../models/jobModels");
 
 const jobRegistration = async(req,res) => {
