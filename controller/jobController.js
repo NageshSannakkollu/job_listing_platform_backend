@@ -28,7 +28,7 @@ const getAllJobsList = (req,res) => {
 
 const getJobBySpecificId = (req,res) => {
     const {id} = req.params;
-    console.log(id)
+    // console.log(id)
     Jobs.getById(id,(err,job)=> {
         try {
             return res.status(200).json(job)
@@ -46,12 +46,12 @@ const getJobBySpecificId = (req,res) => {
 
 const updateJobQuery = async(req,res) => {
     const {id} = req.params;
-    const updateDetails = req.body;
-    console.log("updateDetails:",updateDetails)
+    // const updateDetails = req.body;
+    // console.log("updateDetails:",updateDetails)
     const {aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,selectedSkills}= req.body
     Jobs.updateJobById(id,aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,selectedSkills,(err,newJob) => {
         if(err){
-            console.log("Error:",err.message)
+            // console.log("Error:",err.message)
             return res.status(200).json({message:err.message,success:false})
         }
         return res.status(200).json({message:"Job Updated Successfully!",Job:newJob,success:true})
@@ -69,7 +69,7 @@ const deleteJobBySpecificId = (req,res) => {
             return res.status(200).json({error:err.message,success:false})
         }
         if(job === undefined){
-            return res.status(200).json({message:`Invalid Post Id:${id}`,success:false})
+            return res.status(200).json({message:`Invalid Job Id:${id}`,success:false})
         }
         }
         

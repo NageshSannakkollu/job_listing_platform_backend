@@ -2,11 +2,11 @@ const jwt = require("jsonwebtoken");
 
 const authenticateToken = async(req,res,next) => {
     const authHeaders = req.headers["authorization"]
-    console.log("authHeaders:",authHeaders)
+    // console.log("authHeaders:",authHeaders)
     let jwtToken;
     if(authHeaders !== undefined){
          jwtToken = authHeaders.split(" ")[1]
-        console.log("token:",jwtToken)
+        // console.log("token:",jwtToken)
         if(jwtToken === undefined){
             res.status(401).json({message:"Invalid JWT token"})
         }

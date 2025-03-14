@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS job (
         location TEXT NOT NULL,
         monthlySalary TEXT NOT NULL,
         remoteOrOffice TEXT NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         selectedSkills TEXT
     )`;
     

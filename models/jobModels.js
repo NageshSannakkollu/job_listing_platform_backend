@@ -3,10 +3,9 @@ const db = require("../config/db")
 
 
 const Jobs = {
-    
     create:async (aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,skillsJson,callback) => {
         const jobsQuery = `INSERT INTO job (aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,selectedSkills) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-        db.run(jobsQuery,[aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,skillsJson],function(err){
+        db.run(jobsQuery,[aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,new Date(),skillsJson],function(err){
             callback(err,{id:this.lastID})
         })
     },
