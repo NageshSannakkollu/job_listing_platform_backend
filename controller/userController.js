@@ -3,15 +3,16 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
 const userRegistration = async(req,res) => {
-    const {username,password,email,mobile,role} = req.body;
+    // const {username,password,email,mobile,role} = req.body;
     const userDetails = req.body;
     console.log("userDetails:",userDetails)
-    User.create(username,email,password,mobile,role,(err,newUser) => {
-        if(err){
-            return res.status(200).json({message:"Email already exists",success:false})
-        }
-        return res.status(201).json({message:"New User Created Successfully!",user:newUser,success:true})
-    });
+    res.status(200).json({user:userDetails})
+    // User.create(username,email,password,mobile,role,(err,newUser) => {
+    //     if(err){
+    //         return res.status(200).json({message:"Email already exists",success:false})
+    //     }
+    //     return res.status(201).json({message:"New User Created Successfully!",user:newUser,success:true})
+    // });
 };
 
 const loginUser = async(req,res) => {

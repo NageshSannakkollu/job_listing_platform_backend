@@ -10,14 +10,14 @@ const jobRegistration = async(req,res) => {
     Jobs.create(aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,skillsJson,(err,newJob) => {
         if(err){
             console.log("Error:",err.message)
-            return res.status(200).json({message:err.message})
+            return res.status(200).json({message:err.message,success:false})
         }
         return res.status(201).json({message:"New Job Created Successfully!",Job:newJob,success:true})
     })
 };
 
 const getAllJobsList = (req,res) => {
-    console.log("All users Request")    
+    // console.log("All users Request")    
     Jobs.getAllJobs((err,jobs) => {
         if(err){
             return res.status(200).json({error:err.message,success:false})
