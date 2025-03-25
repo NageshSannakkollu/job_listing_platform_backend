@@ -26,7 +26,25 @@ const User = {
         function (err,user){
             callback(err,user)  
         })
-    } 
+    },
+    deleteUser:(username,callback) => {
+        db.run(`DELETE FROM user WHERE username='${username}'`,
+            function(err,user){
+                callback(err,user)
+            }
+        )
+    },
+
+    getAllUsers:(callback) => {
+        // console.log('All Users')
+        db.all(`SELECT * FROM user`,
+            function(err,user){
+                callback(err,user)
+            }
+        )
+    }
+
+
 }
     
 module.exports = User;

@@ -49,4 +49,25 @@ const profileDetails = (req,res) => {
     })
 }
 
-module.exports = {userRegistration,loginUser,profileDetails}
+const deleteSpecificUser = async(req,res) => {
+    const {username} = req.body;
+    console.log("Username:",username)
+    User.deleteUser(username,(err,user) => {
+        if(err){
+            console.log("Error:",err)
+            return res.status(200).json({message:"Invalid username",success:false})
+        }
+        res.status(200).json({message:"User deleted Successfully",success:true})
+    })
+}
+
+const retrieveAllUsers = async(req,res) => {
+    User.getAllUsers((err,user) => {
+        if(err){
+            return res.status(200).json({message:"Invalid User Request",success:false})
+        }
+        res.status(200).json({users:user,success:true})
+    })
+}
+
+module.exports = {userRegistration,loginUser,profileDetails,deleteSpecificUser,retrieveAllUsers}
