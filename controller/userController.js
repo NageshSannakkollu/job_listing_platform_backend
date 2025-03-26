@@ -3,16 +3,17 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
 const userRegistration = async(req,res) => {
-    // const {username,password,email,mobile,role} = req.body;
-    const userDetails = req.body;
-    console.log("userDetails:",userDetails)
-    res.status(200).json({user:userDetails})
-    // User.create(username,email,password,mobile,role,(err,newUser) => {
-    //     if(err){
-    //         return res.status(200).json({message:"Email already exists",success:false})
-    //     }
-    //     return res.status(201).json({message:"New User Created Successfully!",user:newUser,success:true})
-    // });
+    const {username,password,email,mobile} = req.body;
+    // const userDetails = req.body;
+    // console.log("userDetails:",userDetails)  
+    // console.log("Role:",username,password,email,mobile)
+    // res.status(200).json({user:userDetails})
+    User.create(username,email,password,mobile,(err,newUser) => {
+        if(err){
+            return res.status(200).json({message:"Email already exists",success:false})
+        }
+        return res.status(201).json({message:"New User Created Successfully!",user:newUser,success:true})
+    });
 };
 
 const loginUser = async(req,res) => {
@@ -38,7 +39,7 @@ const loginUser = async(req,res) => {
 
 const profileDetails = (req,res) => {
     const {email} = req;
-    console.log("Email:",email)
+    // console.log("Email:",email)
     User.getProfileEmail(email,async(err,user) => {
         if(err || user===undefined){
             // console.log("Error:",err)
@@ -51,13 +52,13 @@ const profileDetails = (req,res) => {
 
 const deleteSpecificUser = async(req,res) => {
     const {username} = req.body;
-    console.log("Username:",username)
+    // console.log("Username:",username)
     User.deleteUser(username,(err,user) => {
         if(err){
             console.log("Error:",err)
             return res.status(200).json({message:"Invalid username",success:false})
         }
-        res.status(200).json({message:"User deleted Successfully",success:true})
+        res.status(200).json({message:"User deleted Successfully",user:user,success:true})
     })
 }
 

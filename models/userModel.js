@@ -3,14 +3,14 @@ const db = require("../config/db")
 
 
 const User = {
-    create:async (username,email,password,mobile,role,callback) => {
+    create:async (username,email,password,mobile,callback) => {
         const hashedPassword = await bcrypt.hash(password,10)
         const number = parseInt(mobile)
         // console.log(number)
         db.run(
-            `INSERT INTO user (username,email,password,mobile,role) VALUES ('${username}','${email}','${hashedPassword}',${number},'${role}')`,
+            `INSERT INTO user (username,email,password,mobile) VALUES ('${username}','${email}','${hashedPassword}',${number})`,
             function(err){
-                callback(err,{id:this.lastID,username,email,password,mobile,role})
+                callback(err,{id:this.lastID})
             }
         )
     },
