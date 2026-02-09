@@ -1,7 +1,6 @@
 const bcrypt = require("bcryptjs")
 const db = require("../config/db")
 
-
 const User = {
     create:async (username,email,password,mobile,callback) => {
         const hashedPassword = await bcrypt.hash(password,10)
@@ -34,7 +33,6 @@ const User = {
             }
         )
     },
-
     getAllUsers:(callback) => {
         // console.log('All Users')
         db.all(`SELECT * FROM user`,
@@ -43,8 +41,6 @@ const User = {
             }
         )
     }
-
-
 }
     
 module.exports = User;

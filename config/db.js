@@ -8,7 +8,7 @@ let db = new sqlite3.Database(dbPath,(err) => {
     }else{
         console.log(`DB Connected Successfully!`)
     }
-})
+});
 
 const createUserTable = `
 CREATE TABLE IF NOT EXISTS user (
@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS user (
         mobile INTEGER NOT NULL,
         role TEXT NOT NULL DEFAULT 'user'
     )`;
+    
 const createJobTable = `
 CREATE TABLE IF NOT EXISTS job (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -35,13 +36,15 @@ CREATE TABLE IF NOT EXISTS job (
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         selectedSkills TEXT
     )`;
-    
+
+   
 db.run(createUserTable, (err) => {
     if (err) {
         return console.error('Error creating table:', err.message);
     }
     console.log('User Table created successfully');
 });
+
 db.run(createJobTable, (err) => {
     if (err) {
         return console.error('Error creating table:', err.message);

@@ -1,7 +1,6 @@
 // const bcrypt = require("bcryptjs")
 const db = require("../config/db")
 
-
 const Jobs = {
     create:async (aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,skillsJson,callback) => {
         const jobsQuery = `INSERT INTO job (aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,selectedSkills) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`;

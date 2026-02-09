@@ -6,7 +6,7 @@ const jobRegistration = async(req,res) => {
     const jobDetails = req.body;
     const {aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,selectedSkills} = jobDetails
     const skillsJson = JSON.stringify(selectedSkills)
-    console.log("selectedSkills:",jobDetails)
+    // console.log("selectedSkills:",typeof skillsJson)
     Jobs.create(aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,skillsJson,(err,newJob) => {
         if(err){
             console.log("Error:",err.message)
@@ -30,17 +30,16 @@ const getJobBySpecificId = (req,res) => {
     const {id} = req.params;
     // console.log(id)
     Jobs.getById(id,(err,job)=> {
+        if(job === undefined){
+            return res.status(200).json({message:`Invalid Job Id:${id}`,success:false})
+        }
         try {
             return res.status(200).json(job)
         } catch (error) {
             if(err){
-            return res.status(200).json({error:err.message,success:false})
+                return res.status(200).json({error:err.message,success:false})
+            }
         }
-        if(job === undefined){
-            return res.status(200).json({message:`Invalid Job Id:${id}`,success:false})
-        }
-        }
-        
     })
 }
 

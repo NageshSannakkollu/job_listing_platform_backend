@@ -13,8 +13,8 @@ const userRegistration = async(req,res) => {
             return res.status(200).json({message:"Email already exists",success:false})
         }
         return res.status(201).json({message:"New User Created Successfully!",user:newUser,success:true})
-    });
-};
+        });
+    };
 
 const loginUser = async(req,res) => {
     const {email,password} = req.body;
@@ -35,7 +35,7 @@ const loginUser = async(req,res) => {
             res.status(200).json({jwtToken:token,success:true,message:"Login Success",user})
         }  
     })
-}
+};
 
 const profileDetails = (req,res) => {
     const {email} = req;
