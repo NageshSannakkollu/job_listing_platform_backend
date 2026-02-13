@@ -4,10 +4,11 @@ const Jobs = require("../models/jobModels");
 
 const jobRegistration = async(req,res) => {
     const jobDetails = req.body;
-    const {aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,selectedSkills} = jobDetails
+    //console.log("jobDetails:",jobDetails)
+    const {aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,selectedSkills} = jobDetails
     const skillsJson = JSON.stringify(selectedSkills)
-    // console.log("selectedSkills:",typeof skillsJson)
-    Jobs.create(aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,skillsJson,(err,newJob) => {
+    //console.log("selectedSkills:",skillsJson)
+    Jobs.create(aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,skillsJson,(err,newJob) => {
         if(err){
             console.log("Error:",err.message)
             return res.status(200).json({message:err.message,success:false})
@@ -45,10 +46,11 @@ const getJobBySpecificId = (req,res) => {
 
 const updateJobQuery = async(req,res) => {
     const {id} = req.params;
-    // const updateDetails = req.body;
-    // console.log("updateDetails:",updateDetails)
-    const {aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,selectedSkills}= req.body
-    Jobs.updateJobById(id,aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,created_at,selectedSkills,(err,newJob) => {
+    const updateDetails = req.body;
+    console.log("updateDetails:",updateDetails)
+    const {aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,selectedSkills}= req.body
+    const skillsJson = JSON.stringify(selectedSkills)
+    Jobs.updateJobById(id,aboutCompany,addLogoUrl,companyName,companySize,information,jobDescription,jobPosition,jobType,location,monthlySalary,remoteOrOffice,skillsJson,(err,newJob) => {
         if(err){
             // console.log("Error:",err.message)
             return res.status(200).json({message:err.message,success:false})
